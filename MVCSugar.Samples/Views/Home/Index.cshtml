@@ -1,0 +1,55 @@
+﻿@model MVCSugar.Samples.Models.EnumSample
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>MVCSugar Samples</h1>
+    <p class="lead">A collection of HtmlHelpers and other sweet things</p>
+    <p><pre class="nuget-button">Install-Package RedWall.MVCSugar</pre></p>
+</div>
+
+<div class="row">
+    <table class="table">
+        <tr>
+            <td>
+                Html.DisplayFor(m => m.Hero)
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Hero)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Html.EnumDisplayFor(m => m.Hero)
+            </td>
+            <td>
+                @Html.EnumDisplayFor(m => m.Hero)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Html.EnumDropDownListFor(m => m.Hero)
+            </td>
+            <td>
+                @Html.EnumDropDownListFor(m => m.Hero)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Html.EditorFor(m => m.Hero)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.Hero)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Html.TextBoxFor(m => m.Hero)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Hero)
+            </td>
+        </tr>
+    </table>
+</div>

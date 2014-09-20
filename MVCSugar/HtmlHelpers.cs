@@ -10,13 +10,13 @@ namespace System.Web.Mvc.Html
 {
     public static class HtmlHelpers
     {
-        public static MvcHtmlString ImageFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
+        public static MvcHtmlString ImageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
         {
-            if (htmlHelper.ViewData == null || htmlHelper.ViewData.Model == null)
+            if (html.ViewData == null || html.ViewData.Model == null)
                 return MvcHtmlString.Empty;
 
             var deleg = expression.Compile();
-            var val = deleg(htmlHelper.ViewData.Model) as byte[];
+            var val = deleg(html.ViewData.Model) as byte[];
 
             if (val == null || !val.Any())
                 return MvcHtmlString.Empty;
@@ -35,26 +35,40 @@ namespace System.Web.Mvc.Html
             return MvcHtmlString.Create(img.ToString(TagRenderMode.SelfClosing));
         }
 
-        public static MvcHtmlString DisplayEnumNameFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression)
+        public static MvcHtmlString EnumDisplayFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
         {
-            if (htmlHelper.ViewData == null || htmlHelper.ViewData.Model == null)
+            return EnumDisplayNameFor(html, expression);
+        }
+
+        public static MvcHtmlString EnumDisplayNameFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
+        {
+            if (html.ViewData == null || html.ViewData.Model == null)
                 return MvcHtmlString.Empty;
 
-            var metaData = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
-            var enumType = metaData.ModelType;
-            var enumName = Enum.GetName(enumType, metaData.Model);
+            var metaData = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
 
-            var enumField = enumType.GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public).FirstOrDefault(field => field.Name == enumName);
+            if (EnumHelper.IsValidForEnumHelper(metaData))
+            {
+                var enumType = metaData.ModelType;
+                var enumName = Enum.GetName(enumType, metaData.Model);
 
-            if (enumField == null)
-                return MvcHtmlString.Create(enumName);
+                var enumField = enumType.GetField(enumName, BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public);
 
-            var attr = enumField.GetCustomAttributes(typeof(DisplayAttribute), true).FirstOrDefault() as DisplayAttribute;
+                if (enumField != null)
+                {
+                    var attr = enumField.GetCustomAttribute<DisplayAttribute>(inherit: false);
 
-            if (attr == null)
-                return MvcHtmlString.Create(enumField.Name);
+                    if (attr != null)
+                    {
+                        string name = attr.GetName();
 
-            return MvcHtmlString.Create(attr.Name);
+                        if (!string.IsNullOrWhiteSpace(name))
+                            return MvcHtmlString.Create(name);
+                    }
+                }
+            }
+
+            return DisplayExtensions.DisplayFor(html, expression);
         }
 
     }
