@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  For more info on this file format visit http://docs.nuget.org/docs/reference/nuspec-reference.
+-->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>RedWall.MVCSugar</id>
+    <version>0.8.0</version>
+    <authors>Red Wall</authors>
+    <description>
+      Collection of HtmlHelpers and other sweet things
+    </description>
+    <language>en-US</language>
+    <projectUrl>https://github.com/RedWall/MVCSugar</projectUrl>
+
+    <references>
+      <group targetFramework="net45">
+        <reference file="RedWall.MVCSugar.dll" />
+      </group>
+    </references>
+
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Web" targetFramework="net45" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="MVCSugar\bin\Release\RedWall.MVCSugar.dll" target="lib\net45" />
+    <file src="MVCSugar\bin\Release\RedWall.MVCSugar.xml" target="lib\net45" />
+  </files>
+
+
+</package>
