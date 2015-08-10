@@ -5,28 +5,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>RedWall.MVCSugar</id>
-    <version>0.8.1</version>
+    <version>0.8.2</version>
     <authors>Red Wall</authors>
     <description>
       Collection of HtmlHelpers and other sweet things
     </description>
     <language>en-US</language>
     <projectUrl>https://github.com/RedWall/MVCSugar</projectUrl>
-
-    <references>
-      <group targetFramework="net45">
-        <reference file="RedWall.MVCSugar.dll" />
-      </group>
-    </references>
-
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Web" targetFramework="net45" />
-    </frameworkAssemblies>
+    <releaseNotes>
+      Added @Html.EnumDisplay() method for those times you need the name for the enum instance directly
+    </releaseNotes>
   </metadata>
-  <files>
-    <file src="MVCSugar\bin\Release\RedWall.MVCSugar.dll" target="lib\net45" />
-    <file src="MVCSugar\bin\Release\RedWall.MVCSugar.xml" target="lib\net45" />
-  </files>
-
-
 </package>
