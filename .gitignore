@@ -184,3 +184,5 @@ FakesAssemblies/
 
 # Tabs Studio
 *.tss
+.cr/Settings.xml
+.vs/config/applicationhost.config
