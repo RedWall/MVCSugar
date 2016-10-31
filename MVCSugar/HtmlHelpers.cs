@@ -55,25 +55,10 @@ namespace System.Web.Mvc.Html
         {
             var enumType = typeof(TEnum);
 
-            if (EnumHelper.IsValidForEnumHelper(enumType))
-            {
-                var enumName = Enum.GetName(enumType, enumValue);
+            var name = GetDisplayValue(enumType, enumValue);
 
-                var enumField = enumType.GetField(enumName, BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public);
-
-                if (enumField != null)
-                {
-                    var attr = enumField.GetCustomAttribute<DisplayAttribute>(inherit: false);
-
-                    if (attr != null)
-                    {
-                        string name = attr.GetName();
-
-                        if (!string.IsNullOrWhiteSpace(name))
-                            return MvcHtmlString.Create(name);
-                    }
-                }
-            }
+            if (!string.IsNullOrWhiteSpace(name))
+                return MvcHtmlString.Create(name);
 
             return MvcHtmlString.Create(enumValue.ToString());
         }
@@ -106,10 +91,21 @@ namespace System.Web.Mvc.Html
 
             var metaData = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
 
-            if (EnumHelper.IsValidForEnumHelper(metaData))
+            var enumType = metaData.ModelType;
+
+            var name = GetDisplayValue(enumType, metaData.Model);
+
+            if (!string.IsNullOrWhiteSpace(name))
+                return MvcHtmlString.Create(name);
+
+            return DisplayExtensions.DisplayFor(html, expression);
+        }
+
+        private static string GetDisplayValue(Type enumType, object enumValue)
+        {
+            if (EnumHelper.IsValidForEnumHelper(enumType))
             {
-                var enumType = metaData.ModelType;
-                var enumName = Enum.GetName(enumType, metaData.Model);
+                var enumName = Enum.GetName(enumType, enumValue);
 
                 var enumField = enumType.GetField(enumName, BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public);
 
@@ -122,13 +118,12 @@ namespace System.Web.Mvc.Html
                         string name = attr.GetName();
 
                         if (!string.IsNullOrWhiteSpace(name))
-                            return MvcHtmlString.Create(name);
+                            return name;
                     }
                 }
             }
 
-            return DisplayExtensions.DisplayFor(html, expression);
+            return null;
         }
-
     }
 }
