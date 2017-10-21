@@ -30,4 +30,8 @@ Will add a `ReCaptcha` `ModelState` error if the validation fails.
 
 HtmlHelpers
 ====
-See [http://stronglikebool.com/2014/09/20/enum-support-in-mvc-5_1/](http://stronglikebool.com/2014/09/20/enum-support-in-mvc-5_1/)
+`EnumDisplay`, `EnumDisplayFor`, and `EnumDisplayNameFor` See [http://stronglikebool.com/2014/09/20/enum-support-in-mvc-5_1/](http://stronglikebool.com/2014/09/20/enum-support-in-mvc-5_1/)
+
+`@Html.ImageFor(m => m.ImageAsByteArray)`
+Will take a model property that is an image stored as a `byte[]` and will render an `<img>` HTML element with an inline base64 encoded image.
+
