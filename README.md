@@ -27,3 +27,7 @@ ValidateReCaptchaAttribute
 Automatically validates a ReCaptcha when applied to an MVC Controller. Must provide the `RecapchaSecret` when applying the attribute.
 
 Will add a `ReCaptcha` `ModelState` error if the validation fails.
+
+HtmlHelpers
+====
+See [http://stronglikebool.com/2014/09/20/enum-support-in-mvc-5_1/](http://stronglikebool.com/2014/09/20/enum-support-in-mvc-5_1/)
