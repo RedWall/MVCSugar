@@ -5,7 +5,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>RedWall.MVCSugar</id>
-    <version>0.8.2</version>
+    <version>0.8.3</version>
     <authors>Red Wall</authors>
     <description>
       Collection of HtmlHelpers and other sweet things
@@ -13,7 +13,7 @@
     <language>en-US</language>
     <projectUrl>https://github.com/RedWall/MVCSugar</projectUrl>
     <releaseNotes>
-      Added @Html.EnumDisplay() method for those times you need the name for the enum instance directly
+      Updated System.Web.MVC packages to latest version
     </releaseNotes>
   </metadata>
 </package>
